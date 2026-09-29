@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jugar · Ética Millonaria</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="shell" style="max-width:820px">
+    <div class="brand"><span class="brand-dot"></span> ÉTICA MILLONARIA</div>
+
+    <section id="joinCard" class="card" style="margin-top:22px">
+      <div class="eyebrow">Entrar a la partida</div>
+      <h1 style="font-size:clamp(2rem,8vw,3.8rem);margin:10px 0 18px">Únete ahora</h1>
+      <form id="joinForm">
+        <div class="field">
+          <label for="roomInput">Código de sala</label>
+          <input id="roomInput" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456" required />
+        </div>
+        <div class="field">
+          <label for="nameInput">Tu nombre</label>
+          <input id="nameInput" maxlength="24" autocomplete="nickname" placeholder="Ej. Luis" required />
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:18px" type="submit">Entrar al juego</button>
+      </form>
+      <div id="joinNotice" class="notice" aria-live="polite"></div>
+    </section>
+
+    <section id="waiting" class="card hidden center" style="margin-top:22px">
+      <div class="eyebrow">Ya estás dentro</div>
+      <h2 id="welcomeName" style="font-size:2rem;margin:10px 0"></h2>
+      <p class="muted">Espera a que el anfitrión comience la partida.</p>
+      <div class="room-code" id="waitingCode"></div>
+    </section>
+
+    <section id="questionCard" class="card hidden" style="margin-top:22px">
+      <div class="question-meta">
+        <span id="qNumber"></span>
+        <span id="scoreLabel">0 puntos</span>
+      </div>
+      <h2 id="qText" class="question-text"></h2>
+      <div id="qOptions" class="options"></div>
+      <div class="timer-wrap">
+        <div class="timer-line"><div id="timerFill" class="timer-fill"></div></div>
+        <div class="timer-label"><span>Tiempo restante</span><strong id="timerText">30 s</strong></div>
+      </div>
+      <div id="answerNotice" class="notice" aria-live="polite"></div>
+      <div id="explanation" class="explanation hidden"></div>
+    </section>
+
+    <section id="resultsCard" class="card hidden center" style="margin-top:22px">
+      <div class="eyebrow">Partida terminada</div>
+      <h2 style="font-size:2.4rem;margin:10px 0">Resultado final</h2>
+      <div id="myFinal" style="font-size:1.25rem;margin-bottom:18px"></div>
+      <div id="finalLeaderboard" class="podium"></div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/play.js"></script>
+</body>
+</html>

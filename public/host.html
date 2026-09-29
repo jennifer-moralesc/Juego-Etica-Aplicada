@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anfitrión · Ética Millonaria</title>
+  <link rel="stylesheet" href="/styles.css?v=3" />
+  <link rel="preload" href="/sounds/suspense.wav?v=3" as="audio" type="audio/wav" />
+</head>
+<body>
+  <main class="shell">
+    <div class="host-topbar"><div class="brand"><span class="brand-dot"></span> PANEL DEL ANFITRIÓN</div><button id="audioBtn" class="btn audio-btn" type="button" aria-pressed="false">🔇 Activar música</button></div>
+
+    <section id="loadingCard" class="card center" style="margin-top:22px">
+      <p class="muted">Creando tu sala…</p>
+    </section>
+
+    <section id="lobby" class="grid-2 hidden" style="margin-top:22px">
+      <div class="card">
+        <div class="eyebrow">Código de sala</div>
+        <div id="roomCode" class="room-code">------</div>
+        <p class="muted">Los participantes entran a <strong id="joinUrl"></strong> y escriben este código.</p>
+        <div class="actions" style="justify-content:flex-start">
+          <button id="startBtn" class="btn btn-primary" type="button">Comenzar juego</button>
+        </div>
+        <div id="hostNotice" class="notice" aria-live="polite"></div>
+      </div>
+
+      <aside class="card">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+          <strong>Participantes</strong>
+          <span id="playerCount" class="answer-count">0</span>
+        </div>
+        <div id="playerList" class="player-list"></div>
+      </aside>
+    </section>
+
+    <section id="game" class="grid-2 hidden" style="margin-top:22px">
+      <div class="card">
+        <div class="question-meta">
+          <span id="qNumber"></span>
+          <span id="qPrize"></span>
+        </div>
+        <h2 id="qText" class="question-text"></h2>
+        <div id="qOptions" class="options"></div>
+        <div class="timer-wrap">
+          <div class="timer-line"><div id="timerFill" class="timer-fill"></div></div>
+          <div class="timer-label"><span>Tiempo</span><strong id="timerText">30 s</strong></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px">
+          <div id="answerCount" class="answer-count">0 / 0 respuestas</div>
+          <button id="revealBtn" class="btn btn-secondary" type="button">Revelar respuesta</button>
+          <button id="nextBtn" class="btn btn-primary hidden" type="button">Siguiente pregunta</button>
+        </div>
+        <div id="explanation" class="explanation hidden"></div>
+      </div>
+
+      <aside class="card">
+        <strong>Ranking</strong>
+        <div id="leaderboard" class="podium"></div>
+      </aside>
+    </section>
+
+    <section id="finished" class="card hidden center" style="margin-top:22px">
+      <div class="eyebrow">Resultado final</div>
+      <h2 style="font-size:clamp(2rem,5vw,3.4rem);margin:10px 0">🏆 Podio</h2>
+      <div id="finalLeaderboard" class="podium" style="max-width:720px;margin:20px auto"></div>
+      <button id="restartBtn" class="btn btn-primary" type="button">Jugar otra vez con la misma sala</button>
+    </section>
+  </main>
+
+  <audio id="bgMusic" preload="auto" loop playsinline>
+    <source src="/sounds/suspense.wav?v=3" type="audio/wav" />
+  </audio>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/audio.js?v=3"></script>
+  <script src="/host.js?v=3"></script>
+</body>
+</html>
